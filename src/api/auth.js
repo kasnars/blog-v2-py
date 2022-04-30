@@ -7,3 +7,7 @@ export const getUserListHttp = () => {
 export const loginHttp = (data) => {
     return httpPost('/Auth/login/',data)
 }
+
+export const regHttp = (data) => {
+    return httpPost('/Auth/register/',data)
+}

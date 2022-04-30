@@ -2,7 +2,7 @@
     <div class="wrapper">
         <h1 class="title">文章列表</h1>
         <div class="article">
-            <el-button class="addBtn" @click="handleAdd">新增+</el-button>
+            <!-- <el-button class="addBtn" @click="handleAdd">新增+</el-button> -->
             <el-table :data="articleList" border stripe>
                 <el-table-column
                     prop="title"
@@ -14,14 +14,14 @@
                     width="180">
                     <template slot-scope="scope">
                         <i class="el-icon-time"></i>
-                        <span>{{ scope.row.create_time }}</span>
+                        <span>{{ scope.row.created_time.split('T')[0] }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
                     label="操作">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" @click="handleLook(scope.row)">查看</el-button>
-                        <el-button size="mini" type="success" @click="handleEdit(scope.row)">编辑</el-button>
+                        <!-- <el-button size="mini" type="success" @click="handleEdit(scope.row)">编辑</el-button> -->
                         <el-button size="mini" type="danger" @click="handleDelect(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { delLikeHttp, getLikeListHttp } from '../api/blog'
+import { getUserInfo } from '../tools/token'
     export default {
         data() {
             return {
@@ -52,39 +54,47 @@
             },
             handleDelect(row){
                 let id = row.id
-                this.$confirm('此操作将删除该文章, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                  this.$message({
-                    type: 'success',
-                    message: `文章删除成功!`
-                  });
-                    // 发起删除的网络请求
-                    this.$http.post('/api/article/delete',{
-                        article_id:id
-                    })
-                    .then(res => {
-                        if(res.data.code === 0){
-                            //发起删除请求操作
-                            this.$message({
-                                type: 'success',
-                                message: `${id}文章删除成功!`
-                            });
-                            setTimeout(() => {
-                                location.reload()
-                            }, 500);  
-                        }
-                    }).catch(e=>{
-                        console.log(e)
-                    })
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '已取消删除'
-                    });          
-                });
+                // this.$confirm('此操作将删除该文章, 是否继续?', '提示', {
+                //     confirmButtonText: '确定',
+                //     cancelButtonText: '取消',
+                //     type: 'warning'
+                // }).then(() => {
+                //   this.$message({
+                //     type: 'success',
+                //     message: `文章删除成功!`
+                //   });
+                //     // 发起删除的网络请求
+                //     this.$http.post('/api/article/delete',{
+                //         article_id:id
+                //     })
+                //     .then(res => {
+                //         if(res.data.code === 0){
+                //             //发起删除请求操作
+                //             this.$message({
+                //                 type: 'success',
+                //                 message: `${id}文章删除成功!`
+                //             });
+                //             setTimeout(() => {
+                //                 location.reload()
+                //             }, 500);  
+                //         }
+                //     }).catch(e=>{
+                //         console.log(e)
+                //     })
+                // }).catch(() => {
+                //     this.$message({
+                //         type: 'info',
+                //         message: '已取消删除'
+                //     });          
+                // });
+                console.log(id);
+                const { user_id } = getUserInfo()
+                delLikeHttp({
+                    user_id,
+                    blog_id:id
+                }).then(res => {
+                    this.getList()
+                })
             },
             getMyBlogList(){
                this.$http.get('/api/article/myList').then(res => {
@@ -94,11 +104,21 @@
                     console.log(this.articleList);
                  }
                })
+            },
+            getList(){
+                const { user_id } = getUserInfo()
+                getLikeListHttp({user_id}).then(res => {
+                    console.log(res.data.data);
+                    this.articleList = res.data.data
+                })
             }
         },
-        created() {
-            this.getMyBlogList()
-        },
+        // created() {
+        //     this.getMyBlogList()
+        // },
+        mounted(){
+            this.getList(   )
+        }
     }
 </script>
 

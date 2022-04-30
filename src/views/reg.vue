@@ -4,17 +4,17 @@
   <div class="register" >
     <div class="registerBox">
       <el-form :model="regform" ref="regform" :rules="regrules" label-width="0" :inline="false" size="normal" key="2">
-      <el-form-item prop="regname">
-        <el-input v-model="regform.regname"  placeholder="请输入用户名(用作登录账号)"></el-input>
+      <el-form-item prop="username">
+        <el-input v-model="regform.username"  placeholder="请输入用户名(用作登录账号)"></el-input>
       </el-form-item>
-      <el-form-item prop="nickname">
-        <el-input v-model="regform.nickname" placeholder="请输入昵称"></el-input>
+      <el-form-item  prop="password">
+        <el-input type="password" placeholder="请输入密码" v-model="regform.password" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item  prop="pass">
-        <el-input type="password" placeholder="请输入密码" v-model="regform.pass" autocomplete="off"></el-input>
+      <el-form-item  prop="re_password">
+        <el-input type="password" placeholder="请再次输入密码" v-model="regform.re_password" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item  prop="checkPass">
-        <el-input type="password" placeholder="请再次输入密码" v-model="regform.checkPass" autocomplete="off"></el-input>
+      <el-form-item  prop="email">
+        <el-input  placeholder="请输入邮箱" v-model="regform.email" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button class="login" type="primary" @click="register">注册</el-button>
@@ -38,6 +38,7 @@
 import Cookie from 'js-cookie'
 import axios from 'axios';
 import { tryHideFullScreenLoading, showFullScreenLoading } from '../network/serviceHelp'
+import { regHttp } from '../api/auth';
   export default {
     data() {
      // 确认密码的规则
@@ -54,7 +55,7 @@ import { tryHideFullScreenLoading, showFullScreenLoading } from '../network/serv
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.regform.pass) {
+        } else if (value !== this.regform.password) {
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
@@ -68,10 +69,10 @@ import { tryHideFullScreenLoading, showFullScreenLoading } from '../network/serv
           password:''
         },
         regform:{
-          regname:'',
-          nickname:'',
-          pass:'',
-          checkPass:''
+          username:'',
+          password:'',
+          re_password:'',
+          email:''
         },
 
         status: 1,
@@ -130,19 +131,25 @@ import { tryHideFullScreenLoading, showFullScreenLoading } from '../network/serv
           // console.log(res)
           if (res) {
           const data = {
-          name: this.regform.regname,
-          nickname: this.regform.regname,
-          password: this.regform.pass
+          username: this.regform.username,
+          password: this.regform.password,
+          re_password: this.regform.re_password,
+          email:this.regform.email,
           }
-        showFullScreenLoading()
-        axios.post('/user/new', data).then(res => {
-          console.log(res,data,data, 'regok')
-          tryHideFullScreenLoading()
+          console.log(data,'regdata');
+        // showFullScreenLoading()
+        // axios.post('/user/new', data).then(res => {
+        //   console.log(res,data,data, 'regok')
+        //   tryHideFullScreenLoading()
+        //   this.$message.success('注册成功')
+        //   // this.isLoginStatus = false
+        //   this.$router.push('/login')
+        // }).catch(res => {
+        //   this.$message.error('该用户名已被注册')
+        // })
+        regHttp(data).then(res => {
+          console.log(res,'ree');
           this.$message.success('注册成功')
-          // this.isLoginStatus = false
-          this.$router.push('/login')
-        }).catch(res => {
-          this.$message.error('该用户名已被注册')
         })
           } else {
             this.$message.error('注册失败，请检查是否符合输入规则')

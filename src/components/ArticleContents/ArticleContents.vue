@@ -31,8 +31,12 @@
             <i class="iconfont  My-new-icondianzan"></i>
             点赞（{{data.count}})
           </el-button>
+                                    <el-button type="primary" round @click="addLike"  >
+            <!-- <i class="iconfont  My-new-icondianzan"></i> -->
+            收藏
+          </el-button>
                           <el-button type="primary" round @click="toCom"  >
-            <i class="iconfont  My-new-icondianzan"></i>
+            <!-- <i class="iconfont  My-new-icondianzan"></i> -->
             评论
           </el-button>
             <el-button type="primary" round @click="openDig" v-if="data.author == nowId" >
@@ -139,7 +143,7 @@
 </template>
 
 <script>
-import { addComHttp, delComHttp, getComHttp, postSubComHttp, removeBlogHttp, updateBlogHttp } from '../../api/blog';
+import { addComHttp, addLikeHttp, delComHttp, getComHttp, postSubComHttp, removeBlogHttp, updateBlogHttp } from '../../api/blog';
 import { getUserInfo } from '../../tools/token';
   export default {
     props:['data','tags'],
@@ -264,6 +268,16 @@ this.getUserId()
           comment_id:id
         }).then(res => {
           this.$router.go()
+        })
+      },
+      addLike(){
+        const  userdata  = getUserInfo()
+        addLikeHttp({
+          user_id:userdata.user_id,
+          user_name:userdata.username,
+          blog_id:this.data.id,
+        }).then(res => {
+          this.$message.success('收藏成功')
         })
       }
     },

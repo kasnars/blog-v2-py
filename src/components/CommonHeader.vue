@@ -18,16 +18,16 @@
             class="nav"
             >
               <el-menu-item index="1" @click="goToto">
-                 <router-link to="/" ><i class="iconfont My-new-iconshouye"></i>个人作品</router-link>
+                 <router-link to="/" ><i class="iconfont My-new-iconshouye"></i>主页</router-link>
               </el-menu-item>
               <el-menu-item index="2" @click="goToto">
-                 <router-link to="/Lists"><i class="iconfont My-new-iconzixun"></i>个人总结</router-link>
+                 <router-link to="/Lists"><i class="iconfont My-new-iconzixun"></i>个人笔记</router-link>
               </el-menu-item>
               <el-menu-item index="3" @click="goToto, changeTimeShow">
                   <router-link to="/timeLocus" ><i class="iconfont My-new-icondaojishi"></i>学习记录</router-link>
               </el-menu-item>
               <el-menu-item index="4" @click="goToto">
-                 <router-link to="/recommend" ><i class="iconfont My-new-icondianzan"></i>个人常用</router-link>
+                 <router-link to="/recommend" ><i class="iconfont My-new-icondianzan"></i>全部标签</router-link>
               </el-menu-item>
               <el-menu-item index="5" @click="goToto">
                  <router-link to="/aboutMe" ><i class="iconfont My-new-iconwode1"></i>关于作者</router-link>
@@ -35,9 +35,9 @@
               <el-menu-item index="6" @click="goToto">
                  <router-link to="/LeaveWord"><i class="iconfont My-new-iconbianji"></i>给我留言</router-link>
               </el-menu-item>
-              <!-- <el-menu-item index="7"  @click="goToto">
-                 <router-link to="/article" v-if="isSignIn === 1 && nickname === '怪蜀黍'">我的博客</router-link>
-              </el-menu-item> -->
+              <el-menu-item index="7"  @click="goToto">
+                 <router-link to="/article" ><i class="iconfont My-new-icondianzan"></i>我的收藏</router-link>
+              </el-menu-item>
               <el-menu-item index="8" @click="goLogin" v-if="isSignIn != 1">
                  <a   class="login"><i class="iconfont My-new-iconxuanzhonghaoyou"></i>马上登录</a>
               </el-menu-item>

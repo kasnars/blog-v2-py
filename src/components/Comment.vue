@@ -19,27 +19,27 @@
               resize="none"
               >
               </el-input>
-<el-button type="primary" @click="SendComment">发布留言</el-button>
+<el-button type="primary" @click="postBoard ">发布留言</el-button>
           </div>
           <!-- 评论区 -->
           <ul class="Commentarea ">
               <h3>热门留言</h3>
               <li :key="item.id" v-for="item in commentArray">
                   <div class="Commentareabox">
-                      <div class="pic">
+                      <!-- <div class="pic">
                           <img :src="item.img" alt="">
-                      </div>
+                      </div> -->
                       <div class="side">
-                        <span class="nickname">{{item.nickname}}: </span>
+                        <span class="nickname">{{item.user_name}}: </span>
                           <div class="CommentContent">                             
                               <span class="cmcontent">{{item.content}}</span>
                           </div>
                           <div class="timerorlike">
-                              <span class="timer">{{item.create_time}}</span>
-                              <span  @click.once="toLike(item.id)">
+                              <span class="timer">{{item.created_time.split('T')[0]}}</span>
+                              <!-- <span  @click.once="toLike(item.id)">
                                 <i class="iconfont  My-new-icondianzan"></i>
                                 {{item.likes || 0}}
-                                </span>
+                                </span> -->
                               <!-- <span class="delete" v-if="thisNickName === '怪蜀黍'"  @click="handleDelect(item.id)">删除</span> -->
                           </div>
                       </div>
@@ -55,6 +55,8 @@
 import Cookie from 'js-cookie'
 import axios from 'axios';
 import { showFullScreenLoading, tryHideFullScreenLoading } from '../network/serviceHelp'
+import { createBoardHttp, getBoardHttp } from '../api/blog';
+import { getUserInfo } from '../tools/token';
   export default {
     inject: ['reload'],
     props:['articleId'],
@@ -189,6 +191,29 @@ import { showFullScreenLoading, tryHideFullScreenLoading } from '../network/serv
           })
           // this.$router.go(0)
         })
+      },
+      getAllBoard(){
+        getBoardHttp().then(res=>{
+          console.log(res.data.data);
+          this.commentArray = res.data.data
+        })
+      },
+      postBoard(){
+        if (localStorage.getItem('isLoginStatus') != 1) {
+          this.$message.error('还未登录，请先登录')
+        } else {
+          const userdata = getUserInfo()
+          createBoardHttp({
+            content:this.textarea,
+            user_id:userdata.user_id,
+            user_name:userdata.username,
+          }).then(res => {
+            this.$message.success('留言成功')
+            this.getAllBoard()
+          })
+        }
+        
+
       }
     },
     computed:{
@@ -197,8 +222,11 @@ import { showFullScreenLoading, tryHideFullScreenLoading } from '../network/serv
         return localStorage.getItem('isLoginStatus');
       },
     },
-    created(){
-      this.getAllComment()
+    // created(){
+    //   this.getAllComment()
+    // },
+    mounted(){
+      this.getAllBoard()
     }
   }
 </script>

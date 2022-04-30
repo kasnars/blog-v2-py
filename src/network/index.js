@@ -28,14 +28,23 @@ export default function setAxios() {
   // })
 }
 
-export const httpGet = (url,data={}) =>{
-  const tokenYzx = window.localStorage.getItem('tokenYzx')
-    return axios.get(url,{
-      params:{
-        token:tokenYzx,
+export const httpGet = (url,data={},noAuth=false) =>{
+  if (!noAuth) {
+    const tokenYzx = window.localStorage.getItem('tokenYzx')
+    return axios.get(url, {
+      params: {
+        token: tokenYzx,
         ...data
       }
     })
+  } else {
+    return axios.get(url, {
+      params: {
+        ...data
+      }
+    })
+  }
+
 }
 
 export const httpPost = (url,data={},query={},auth=false) => {

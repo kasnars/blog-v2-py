@@ -64,7 +64,7 @@ import BlogCard from "../components/BlogCart/BlogCard.vue";
 import tally from "../components/sidebar/tally.vue";
 import chat from "../components/Chat/chat.vue";
 import axios from "axios";
-import { blogSearchHttp } from '../api/blog'
+import { blogSearchHttp, getAllBlogListHttp } from '../api/blog'
 import {
   tryHideFullScreenLoading,
   showFullScreenLoading,
@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      blogsList:'',
+      blogsList:[],
       search:'',
       AllArticle: [
         // {
@@ -215,28 +215,37 @@ export default {
     //       this.$store.commit('setRecommendArry',RecommendArry)
     //       this.$EventBus.$emit('Render')
     // },
-    getWorksData() {
-      showFullScreenLoading();
-      return axios.get("/getworks").then((res) => {
-        this.worksdata = res.data.data;
-      });
-    },
+    // getWorksData() {
+    //   showFullScreenLoading();
+    //   return axios.get("/getworks").then((res) => {
+    //     this.worksdata = res.data.data;
+    //   });
+    // },
     async initUserList() {
       const { data } = await getUserListHttp();
       console.log(data, "data");
     },
-    async blogSearch(){
-      const { data } = await blogSearchHttp({
+      blogSearch(){
+      // const { data } = await blogSearchHttp({
+      //   q:this.search
+      // })
+      // console.log(data);
+      // this.blogsList = data.blogs
+      blogSearchHttp({
         q:this.search
+      }).then(res => {
+        this.blogsList = res.data.blogs
       })
-      console.log(data);
-      this.blogsList = data.blogs
+    },
+    async getAllBlog() {
+      const {data} = await getAllBlogListHttp()
+      console.log(data,'bloglist');
     }
   },
   created() {
-    this.getWorksData().then(() => {
-      tryHideFullScreenLoading();
-    });
+    // this.getWorksData().then(() => {
+    //   tryHideFullScreenLoading();
+    // });
   },
   mounted() {
     // let wow = new WOW.WOW({
@@ -247,9 +256,14 @@ export default {
     //   live: true
     // });
     // wow.init();
-    this.initUserList();
-    getUserInfo()
+    // this.initUserList();
+        let isLogin = localStorage.getItem('isLoginStatus')
+    if (isLogin == 1) {
+        getUserInfo()
+    }
+    
     this.blogSearch()
+    // this.getAllBlog()
   },
 };
 </script>

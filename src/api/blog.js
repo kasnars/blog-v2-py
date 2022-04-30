@@ -9,7 +9,7 @@ export const getBlogByIdHttp = (data) => {
 }
 
 export const blogSearchHttp = (data) => {
-    return httpGet('/Blog/blog_search/', data)
+    return httpGet('/Blog/blog_search/', data,true)
 }
 export const createBlogHttp = (data) => {
     return httpPost('/Blog/create_blog/',data)
@@ -40,4 +40,24 @@ export const postSubComHttp = (data) => {
 }
 export const delComHttp = (data) => {
     return httpGet('/Comment/commentlist_remove/', data)
+}
+
+export const getBoardHttp = (data) => {
+    return httpGet('/Board/board_get/', data, true)
+}
+
+export const createBoardHttp = (data) => {
+    return httpPost('/Board/board_create/',data)
+}
+
+export const getLikeListHttp = (data) => {
+    return httpGet('/Blog/like_blog_create/',data)
+}
+
+export const delLikeHttp = (data) => {
+    return httpGet('/Blog/like_blog_delete/',data)
+}
+
+export const addLikeHttp = (data) => {
+    return httpPost('/Blog/like_blog_create/',data)
 }
