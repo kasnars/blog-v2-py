@@ -17,6 +17,24 @@
   </span>
 </el-dialog>
 
+<!-- <el-button type="text" @click="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button> -->
+
+<el-dialog title="该标签相关文章" :visible.sync="dialogTableVisible">
+  <el-table :data="gridData">
+    <el-table-column property="title" label="标题" width="200"></el-table-column>
+    <el-table-column property="views" label="浏览量" width="200"></el-table-column>
+    <!-- <el-table-column property="address" label="地址"></el-table-column> -->
+    <el-table-column label="操作">
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="toBlog( scope.row)">详情</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</el-dialog>
+
+
     <div class="block recommend wow slideInRight bgtrans">
       <div class="outblock">
       <title-box title="全部标签"></title-box>
@@ -28,7 +46,7 @@
             <a :href="item.url" target="_blank">{{item.name}}</a>
           </li>
         </ul> -->
-          <el-tag type=""  v-for=" item in tagList" :key="item.id" class="tags_item">{{item.tag_name}}</el-tag>
+          <el-tag type=""  v-for=" item in tagList" :key="item.id" class="tags_item" @click="modalTags(item.id)">{{item.tag_name}}</el-tag>
       </div>
     </div>
   </div>
@@ -36,6 +54,7 @@
 
 <script>
 import WOW from "wowjs";
+import { getTagBlogs } from '../api/blog';
 import { createTagHttp, getUserTagsHttp } from "../api/tag";
 import titleBox from "../components/TitleBox/titleBox.vue";
 export default {
@@ -46,7 +65,9 @@ export default {
       tagList:[],
       postTag:'',
       form:{},
-      dialogVisible:false
+      dialogVisible:false,
+      dialogTableVisible:false,
+      gridData:[]
     };
   },
   methods: {
@@ -61,6 +82,19 @@ export default {
         this.dialogVisible = false
         this.getTagsRemote();
       })
+    },
+    modalTags(id){
+      
+      console.log(id);
+      getTagBlogs({tag_id:id}).then(res => {
+        console.log(res.data.blogs);
+        this.gridData = res.data.blogs
+        this.dialogTableVisible = true
+      })
+    },
+    toBlog(row){
+      console.log(row);
+      this.$router.push({ name: "detail", params: { id: row.id } });
     }
   },
   mounted() {

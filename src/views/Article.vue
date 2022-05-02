@@ -1,5 +1,17 @@
 <template>
     <div class="wrapper">
+        <el-dialog
+  title="提示"
+  :visible.sync="centerDialogVisible"
+  width="30%"
+  center>
+  <span>您还未登录，无法查看收藏列表</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="toPre">返回上一页</el-button>
+    <el-button type="primary" @click="toLogin">马上登录</el-button>
+  </span>
+</el-dialog>
+
         <h1 class="title">文章列表</h1>
         <div class="article">
             <!-- <el-button class="addBtn" @click="handleAdd">新增+</el-button> -->
@@ -37,7 +49,8 @@ import { getUserInfo } from '../tools/token'
     export default {
         data() {
             return {
-                articleList:[]
+                articleList:[],
+                centerDialogVisible:true
             }
         },
         methods:{
@@ -111,13 +124,25 @@ import { getUserInfo } from '../tools/token'
                     console.log(res.data.data);
                     this.articleList = res.data.data
                 })
+            },
+            toLogin(){
+                this.$router.push('/login')
+            },
+            toPre(){
+                this.$router.go(-1)
+            }
+
+        },
+        created() {
+            // this.getMyBlogList()
+                        if (localStorage.getItem('isLoginStatus') == 1) {
+                this.centerDialogVisible = false
             }
         },
-        // created() {
-        //     this.getMyBlogList()
-        // },
         mounted(){
             this.getList(   )
+
+            
         }
     }
 </script>

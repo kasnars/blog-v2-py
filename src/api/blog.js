@@ -61,3 +61,7 @@ export const delLikeHttp = (data) => {
 export const addLikeHttp = (data) => {
     return httpPost('/Blog/like_blog_create/',data)
 }
+
+export const getTagBlogs = (data) => {
+    return httpGet('/Blog/get_tag_blog/',data)
+}
