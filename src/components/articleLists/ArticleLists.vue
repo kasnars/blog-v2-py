@@ -1,5 +1,23 @@
 <template>
   <div>
+
+    <el-dialog
+  title="新增标签"
+  :visible.sync="tagShow"
+  width="30%"
+  >
+   <el-form :model="form">
+    <el-form-item label="新增标签名" >
+      <el-input v-model="tempTags" ></el-input>
+    </el-form-item>
+  </el-form>
+
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="tagShow = false">取 消</el-button>
+    <el-button type="primary" @click="postTagBtn">确 定</el-button>
+  </span>
+</el-dialog>
+
     <el-dialog
   title="新增笔记"
   :visible.sync="dialogVisible"
@@ -15,6 +33,12 @@
       :value="item.tag_name">
     </el-option>
   </el-select>
+  <el-form-item label="创建标签">
+    <el-button @click="tagShow = true">点击创建新标签</el-button>
+  </el-form-item>
+  <el-form-item label="新创建的标签为" v-if="endTags">
+    <el-tag type="success">{{endTags}}</el-tag>
+  </el-form-item>
   </el-form-item>
     <el-form-item label="笔记标题" >
       <el-input v-model="form.title" ></el-input>
@@ -46,8 +70,8 @@
         >
           <el-card :body-style="{ padding: '10px' }" class="contanincard">
             <el-image
-              style="width: 400px; height: 200px"
-              :src="item.img"
+              style="width: 100%; height: 200px"
+              src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp5.itc.cn%2Fimages03%2F20200601%2F53b43699e59c467c82b666f645ba4bd4.jpeg&refer=http%3A%2F%2Fp5.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1654181892&t=8b957dbebd054183fdcd7a51347d4089"
               fit="cover"
             ></el-image>
             <div style="padding: 10px">
@@ -76,7 +100,7 @@
 
 <script>
 import { createBlogHttp, updateBlogHttp } from '../../api/blog';
-import { createTagRelationHttp, getUserTagsHttp } from '../../api/tag';
+import { createTagHttp, createTagRelationHttp, getUserTagsHttp } from '../../api/tag';
 
 import { getUserInfo } from '../../tools/token';
 import TitleBox from "../TitleBox/titleBox.vue";
@@ -91,6 +115,9 @@ export default {
     form:{},
     httpTags:'',
     postTags:'',
+    endTags:'',
+    tempTags:'',
+    tagShow:false,
     }
 
   },
@@ -120,10 +147,16 @@ console.log(this.httpTags);
       const { user_id } = getUserInfo()
       this.form.author = user_id
       console.log(this.form,'postfion');
+      // if (this.endTags) {
+      //   this.form.postTags = [...this.form.postTags, this.endTags]
+      // }
+      console.log(this.form,'postfion');
       createBlogHttp(this.form).then(res => {
         this.postTagAndBlog(res.data.id)
         this.$parent.getAllBlogList()
         this.form = null
+        this.endTags = null
+        this.$router.go()
       })
       this.dialogVisible = false
     },
@@ -132,11 +165,20 @@ console.log(this.httpTags);
         
       })
     },
+    postTagBtn(){
+      createTagHttp({
+        tag_names:[this.tempTags]
+      }).then(res => {
+        this.tagShow = false
+        this.endTags = this.tempTags
+        // this.getTagsRemote();
+      })
+    },
     postTagAndBlog(id){
       console.log(id,this.postTags);
       createTagRelationHttp({
         blog_id:id,
-        tag_names:this.postTags
+        tag_names:[...this.postTags, this.endTags]
       })
     }
   },

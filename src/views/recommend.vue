@@ -38,7 +38,7 @@
     <div class="block recommend wow slideInRight bgtrans">
       <div class="outblock">
       <title-box title="全部标签"></title-box>
-      <el-button type="primary" round @click="dialogVisible = true">新增标签</el-button>
+      <!-- <el-button type="primary" round @click="dialogVisible = true">新增标签</el-button> -->
       </div>
       <div>
         <!-- <ul>
