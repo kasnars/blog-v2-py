@@ -24,17 +24,12 @@
                 </el-col>
               <el-col :lg="6" :xl="6">
                 <div class="grid-content bg-purple-light synopsis" ref="sidebar">
-                  <!-- 侧边栏 -->
+
                     <aside class="wow slideInRight">
                       <personal-details class="wow slideInRight maginbot"></personal-details>
 
-                       <div class="block weather">
-                         <!-- <div class="block maginbot item">
-                           “时间就像海绵里的水,只要愿挤,总还是有的”
-                         </div>
-                         <div class="block item">
-                           “人类的悲欢并不相通，我只觉得他们吵闹。”
-                         </div>                -->
+                       <!-- <div class="block weather">
+
                          <div class="weatherheader">
                           <div class="itemtext">当前实时天气</div>
                           <div class="locationtext"><i class="el-icon-location"></i>
@@ -56,10 +51,10 @@
                             风力: {{weatherData.power}}</p>
                          </div>
                          <div class="weatherfoot">数据来源：聚合API</div>
-                       </div>
+                       </div> -->
 
 
-                      <tally class="maginbot" :visit="visit"></tally>
+                      <!-- <tally class="maginbot" :visit="visit"></tally> -->
                       <!-- <music class="maginbot  slideInLeft" data-wow-delay="0.2s"></music> -->
                       <!-- <div class="block maginbot">
                         <title-boxs title="最新推荐"></title-boxs>
@@ -147,15 +142,21 @@ export default {
     }
   },
   mounted(){
-    axios.get('/juheapi/weather')
-    .then(res => {
-      console.log(res.data.data.result.realtime)
-      this.weatherData = res.data.data.result.realtime
-    })
-    axios.get('/read').then(res => {
-      // console.log(res.data.data, 'read')
-      this.visit = res.data.data
-    })
+    // const me = {
+    //   methods:'get',
+    //   url:'http:kasnars.club/juheapi/weather',
+    //   responseType:'json'
+    // }
+    // axios(me)
+    // .then(res => {
+    //   console.log(res,'rrrr');
+    //   console.log(res.data.data.result.realtime)
+    //   this.weatherData = res.data.data.result.realtime
+    // })
+    // axios.get('/read').then(res => {
+    //   // console.log(res.data.data, 'read')
+    //   this.visit = res.data.data
+    // })
   },
   activated(){
 

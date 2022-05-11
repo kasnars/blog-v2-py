@@ -21,7 +21,7 @@
                  <router-link to="/" ><i class="iconfont My-new-iconshouye"></i>主页</router-link>
               </el-menu-item>
               <el-menu-item index="2" @click="goToto">
-                 <router-link to="/Lists"><i class="iconfont My-new-iconzixun"></i>个人笔记</router-link>
+                 <router-link to="/Lists"><i class="iconfont My-new-iconzixun"></i>博客文章</router-link>
               </el-menu-item>
               <el-menu-item index="3" @click="goToto, changeTimeShow">
                   <router-link to="/timeLocus" ><i class="iconfont My-new-icondaojishi"></i>学习记录</router-link>

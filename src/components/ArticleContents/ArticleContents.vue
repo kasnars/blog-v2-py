@@ -27,7 +27,7 @@
           >
         </mavon-editor>
       </div>
-                <el-button type="primary" round @click.once="like()" >
+                <el-button type="primary" round @click.once="likeh()" >
             <i class="iconfont  My-new-icondianzan"></i>
             点赞（{{data.count}})
           </el-button>
@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import { addComHttp, addLikeHttp, delComHttp, getComHttp, postSubComHttp, removeBlogHttp, updateBlogHttp } from '../../api/blog';
+import { addComHttp, addLikeHttp, delComHttp, getComHttp, likeHttp, postSubComHttp, removeBlogHttp, updateBlogHttp } from '../../api/blog';
 import { getUserInfo } from '../../tools/token';
   export default {
     props:['data','tags'],
@@ -279,6 +279,17 @@ this.getUserId()
         }).then(res => {
           this.$message.success('收藏成功')
         })
+      },
+      likeh(){
+        if(this.data.good_status == 1){
+          this.$message.error('您已点赞过')
+        } else{
+        likeHttp({blog_id:this.data.id,}).then(res => {
+          this.$message.success('点赞成功')
+          this.$router.go()
+        })
+        }
+
       }
     },
  }

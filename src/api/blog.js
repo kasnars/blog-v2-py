@@ -65,3 +65,11 @@ export const addLikeHttp = (data) => {
 export const getTagBlogs = (data) => {
     return httpGet('/Blog/get_tag_blog/',data)
 }
+
+export const likeHttp = (data) => {
+    return httpPost('/Blog/good_blog_create/',data)
+}
+
+export const deikeHttp = (data) => {
+    return httpPost('/Blog/good_blog_delete/',data)
+}

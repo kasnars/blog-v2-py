@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>{{"KasnarsBlog 已上线 "+day+"天"+hour+"小时"+minute+"分"+seconds+"秒"}}</span>
+    <!-- <span>{{"KasnarsBlog 已上线 "+day+"天"+hour+"小时"+minute+"分"+seconds+"秒"}}</span> -->
   </div>
 </template>
 
