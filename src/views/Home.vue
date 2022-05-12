@@ -116,24 +116,24 @@ export default {
       // 轮播图数据
       LbtArticle: [
         {
-          url: "https://juejin.cn/post/7006518993385160711",
+          url: "https://www.csdn.net/",
           idView:
-            "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/73234eb50ab24619a4c105746f872061~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp",
+            "https://img2.baidu.com/it/u=2474219441,3739941751&fm=253&fmt=auto&app=138&f=PNG?w=500&h=257",
         },
         {
-          url: "https://juejin.cn/post/6844903512845860872",
+          url: "https://stackoverflow.com/",
           idView:
-            "https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2017/11/21/15fdd9dfc3293a5c~tplv-t2oaga2asx-zoom-crop-mark:1304:1304:1304:734.awebp",
+            "https://img0.baidu.com/it/u=1143562896,3429761660&fm=253&fmt=auto&app=138&f=JPEG?w=1000&h=500",
         },
+        // {
+        //   url: "https://juejin.cn/post/6844903959283367950",
+        //   idView:
+        //     "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/07525f7f55dc492c9e70157f45140e37~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp",
+        // },
         {
-          url: "https://juejin.cn/post/6844903959283367950",
+          url: "https://juejin.cn/",
           idView:
-            "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/07525f7f55dc492c9e70157f45140e37~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp",
-        },
-        {
-          url: "https://juejin.cn/post/6844904182843965453",
-          idView:
-            "https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/8/17291677b3e079dd~tplv-t2oaga2asx-zoom-crop-mark:1304:1304:1304:734.awebp",
+            "https://img1.baidu.com/it/u=3855815984,3683500545&fm=253&fmt=auto&app=138&f=JPEG?w=480&h=320",
         },
       ],
       // 头部文章数据

@@ -19,12 +19,12 @@
         <ul class="buttonBox">
           <li class="item">
             <a href="javascript:;" title="个人微信号" class="item-wx"></a>
-            <img class="pic" src="~@/assets/img/wx.jpg" alt="" />
+            <img class="pic" src="~@/assets/img/myvx.jpg" alt="" />
           </li>
           <el-tooltip
             class="item"
             effect="dark"
-            content="kasnars@163.com"
+            content="1185785464@qq.com"
             placement="top-start"
           >
             <li class="item">
@@ -34,19 +34,19 @@
           <el-tooltip
             class="item"
             effect="dark"
-            content="个人常用，点击跳转"
+            content="个人常用git地址，点击跳转"
             placement="top-start"
           >
             <li class="item">
               <a
-                href="https://gitee.com/kasnars"
+                href="https://gitee.com/python-yang-1117"
                 title="gitee主页"
                 target="_blank"
                 class="item-git"
               ></a>
             </li>
           </el-tooltip>
-          <el-tooltip
+          <!-- <el-tooltip
             class="item"
             effect="dark"
             content="网络原因更新较少"
@@ -59,7 +59,7 @@
                 class="item-qq"
               ></a>
             </li>
-          </el-tooltip>
+          </el-tooltip> -->
         </ul>
       </div>
     </div>

@@ -2,9 +2,9 @@
   <div>
     <div class="wrapper marginTop wow slideInLeft">
      <div class="block aboutMe">
-       <div class="avatar">
+       <!-- <div class="avatar">
          <img src="../../src/assets/img/myavatar.jpg" alt="">
-       </div>
+       </div> -->
             <!-- <p><span class="threed threeds">Kasnars</span></p> -->
             <p><span class="threed threeds">杨子轩</span></p>
             <p><span class="threed threeds">男，00后，软件工程大四学生</span></p>
@@ -16,11 +16,11 @@
             <p><span class="threed threeds">每天没事喜欢刷各种知识论坛和技术论坛，啥都想了解，啥都想看看</span></p>
             <p><span class="threed threeds">个人邮箱：k1185785464@qq.com</span></p>
             <p><span class="threed threeds">个人Git：https://gitee.com/python-yang-1117</span></p>
-            <el-button type="primary" round class="btn">
+            <!-- <el-button type="primary" round class="btn">
               <a href="http://1.116.134.48:7001/me" target="_blank">
               点击下载我的个人简历qq.com
               </a>
-              </el-button>
+              </el-button> -->
      </div>
     </div>
   </div>

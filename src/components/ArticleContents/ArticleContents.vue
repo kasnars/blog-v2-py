@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import { addComHttp, addLikeHttp, delComHttp, getComHttp, likeHttp, postSubComHttp, removeBlogHttp, updateBlogHttp } from '../../api/blog';
+import { addComHttp, addLikeHttp, delComHttp, deikeHttp, getComHttp, likeHttp, postSubComHttp, removeBlogHttp, updateBlogHttp } from '../../api/blog';
 import { getUserInfo } from '../../tools/token';
   export default {
     props:['data','tags'],
@@ -282,7 +282,11 @@ this.getUserId()
       },
       likeh(){
         if(this.data.good_status == 1){
-          this.$message.error('您已点赞过')
+          deikeHttp({blog_id:this.data.id,}).then(res => {
+           this.$message.info('取消点赞')
+          this.$router.go()
+          })
+          // this.$message.error('您已点赞过')
         } else{
         likeHttp({blog_id:this.data.id,}).then(res => {
           this.$message.success('点赞成功')

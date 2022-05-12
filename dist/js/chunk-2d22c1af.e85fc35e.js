@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22c1af"],{f28e:function(e,n,c){"use strict";c.r(n);var t=function(){var e=this,n=e.$createElement,c=e._self._c||n;return c("div",{staticClass:"block wow slideInRight"},[c("comment")],1)},o=[],s=(c("bc1b"),c("4ea3")),a={components:{Comment:s["a"]},mounted:function(){}},i=a,u=c("2877"),l=Object(u["a"])(i,t,o,!1,null,"e84ec8cc",null);n["default"]=l.exports}}]);
-//# sourceMappingURL=chunk-2d22c1af.e85fc35e.js.map
