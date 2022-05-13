@@ -14,7 +14,7 @@
             <!-- <p><span class="threed threeds">常用工具：Element UI，BootStrap</span></p> -->
             <p><span class="threed threeds">想要成为一名优秀的后端工程师</span></p>
             <p><span class="threed threeds">每天没事喜欢刷各种知识论坛和技术论坛，啥都想了解，啥都想看看</span></p>
-            <p><span class="threed threeds">个人邮箱：k1185785464@qq.com</span></p>
+            <p><span class="threed threeds">个人邮箱：1185785464@qq.com</span></p>
             <p><span class="threed threeds">个人Git：https://gitee.com/python-yang-1117</span></p>
             <!-- <el-button type="primary" round class="btn">
               <a href="http://1.116.134.48:7001/me" target="_blank">

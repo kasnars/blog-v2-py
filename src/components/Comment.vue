@@ -73,7 +73,7 @@ import { getUserInfo } from '../tools/token';
         textarea:'',
 
         imageUrl:sessionStorage.getItem("avatar"),
-        defaultAvatar:require("@/assets/img/pl.jpg"),
+        defaultAvatar:require("@/assets/img/plnew.jpg"),
 
         thisNickName:sessionStorage.getItem("nickname"),
       }
